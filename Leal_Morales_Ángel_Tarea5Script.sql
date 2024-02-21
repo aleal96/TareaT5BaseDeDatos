@@ -1,0 +1,24 @@
+SELECT * FROM tb_productos WHERE precio > 10;
+SELECT * FROM tb_empleados WHERE NOT nombre = 'Juan';
+SELECT * FROM tb_productos WHERE nombre LIKE 'A%';
+SELECT * FROM tb_puestos WHERE antiguedad_requerida >= 2;
+SELECT * FROM tb_centrosDeTrabajo WHERE cp = 12345 AND direccion LIKE '%calle%';
+SELECT * FROM tb_productos WHERE precio <= 5 AND nombre LIKE '%leche%';
+SELECT * FROM tb_empleados WHERE fnacimiento < '1990-01-01';
+SELECT * FROM tb_productos WHERE NOT nombre LIKE 'C%' AND precio BETWEEN 5 AND 10;
+SELECT * FROM tb_empleados WHERE dni BETWEEN '10000000' AND '20000000';
+SELECT * FROM tb_productos WHERE idCategoria IN (1, 3, 5);
+SELECT MAX(precio) AS precio_maximo, MIN(precio) AS precio_minimo FROM tb_productos;
+SELECT COUNT(*) AS total_empleados FROM tb_empleados;
+SELECT AVG(precio) AS precio_promedio FROM tb_productos;
+SELECT SUM(stock) AS total_stock FROM tb_stock;
+SELECT CONCAT(nombre, ' ', apellidos) AS nombre_completo FROM tb_empleados;
+SELECT MAX(fnacimiento) AS fecha_nacimiento_reciente FROM tb_empleados;
+SELECT MIN(antiguedad_requerida) AS antiguedad_minima FROM tb_puestos;
+SELECT COUNT(DISTINCT idcategoria) AS total_categorias FROM tb_productos;
+SELECT idcategoria, AVG(precio) AS precio_promedio_por_categoria FROM tb_productos GROUP BY idcategoria;
+SELECT p.nombre, SUM(s.stock) AS total_stock
+FROM tb_stock s JOIN tb_productos p ON s.idProducto = p.idProducto GROUP BY p.nombre;
+SELECT p.idcategoria, SUM(s.stock) AS total_stock FROM tb_stock s JOIN tb_productos p ON s.idProducto = p.idProducto GROUP BY p.idcategoria HAVING total_stock > 100;
+SELECT nombre, precio FROM tb_productos ORDER BY precio DESC;
+SELECT idCentros, COUNT(*) AS num_empleados FROM tb_empleados GROUP BY idCentros ORDER BY num_empleados DESC LIMIT 5;
